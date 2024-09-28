@@ -1,0 +1,17 @@
+
+.header{
+   background-color: rgb(243, 250, 255) !important ;
+   box-shadow: none !important;
+}
+
+.drawer , .side-nav-list{
+    background-color: rgb(243, 250, 255) !important ;
+}
+
+.logo-icon{
+    width:35px;
+    height: 30px;
+    object-fit: contain;
+    margin-right:18px;
+    margin-top:6px;
+}
