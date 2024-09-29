@@ -5,37 +5,28 @@ import React, { Fragment, useEffect } from 'react'
 import { Box, IconButton, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
-import { getMailFromServer } from '../../redux/gmailSlice';
+import { getStarredMailFromServer } from '../../redux/gmailSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteDoc, doc } from 'firebase/firestore';
-import { FIRESTORE } from '../../firebase.config';
+
 
 const Starred = () => {
 
-const receivedStarredMail = useSelector(state => state.gmail.receivedStarredMail);
-console.log(receivedStarredMail)
+const starredMail = useSelector(state => state.gmail.starredMail);
+console.log(starredMail)
  
   const dispatch = useDispatch()
+
   useEffect(() => {
-    dispatch(getMailFromServer("StarredMail"))
+    dispatch(getStarredMailFromServer())
+    console.log('hii')
   }, []); 
 
-
-  const removeStarredMail = async (id) => {
-    await deleteDoc(doc(FIRESTORE, "StarredMail", id))
-        .then(() => {
-            alert("mail unstarred");
-            dispatch(getMailFromServer("StarredMail"))
-        }).catch(err => {
-            console.log("Error ->", err);
-        });
-}
 
   return (
 
 
     <>
-    {receivedStarredMail?.map(mail => (
+    {starredMail?.map(mail => (
       <Fragment key={mail.id}>
   <Box className='mailTitleBox'>
       <IconButton

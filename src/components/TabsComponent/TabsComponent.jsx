@@ -51,13 +51,13 @@ export default function TabsComponent() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-       <TabSection collectionName='PrimaryMail'/>
+       <TabSection filterType = 'primary'/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-      <TabSection collectionName='PromotionsMail'/>
+      <TabSection filterType = 'promotion'/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-      <TabSection collectionName='SocialMail'/>
+      <TabSection filterType = 'social'/>
       </CustomTabPanel>
     </Box>
   );

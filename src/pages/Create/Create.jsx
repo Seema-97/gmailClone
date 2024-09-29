@@ -1,74 +1,88 @@
 import { collection, addDoc } from "firebase/firestore";
 import { FIRESTORE } from "../../firebase.config";
 import React, { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleFormSubmit, handleInputChange } from "../../redux/gmailSlice";
 
 const sectionName = ["primary", "promotion", "social"];
 
-const Create = () => {
-  const [inputData, setInputData] = useState({
-    sectionName: "",
-    subject: "",
-    body: "",
-  });
 
-  const clearForm = () => {
-    setInputData({
-      sectionName: "",
-      subject: "",
-      body: "",
-    });
-  };
+  
+const Create = () => {
+  // const isStarred = useSelector(state => state.gmail.isStarred);
+  // const isStarBtnClicked = useSelector(state => state.gmail.isStarBtnClicked
+  // ) 
+  // const starredMails = useSelector(state => state.gmail.starredMails)
+  // console.log('starred mail ' + starredMails)
+
+  // console.log('star btn is clicked')
+  // console.log(`is starred state is ${isStarred}`)
+
+  const dispatch = useDispatch()
+  const inputData = useSelector(state => state.gmail.inputData)
+
+  // const [inputData, setInputData] = useState({
+  //   sectionName: "",
+  //   subject: "",
+  //   body: "",
+  //   senderEmailAddress:"",
+  //   receiverEmailAddress: "",
+  //   isStarred: isStarred
+  // });
+
+  // const clearForm = () => {
+  //   setInputData({
+  //     sectionName: "",
+  //     subject: "",
+  //     body: "",
+  //     senderEmailAddress:"",
+  //     receiverEmailAddress: ""
+  //   });
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setInputData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+    dispatch(handleInputChange({ name, value }))
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleSubmitBtn = async (e) => {
     e.preventDefault();
-    console.log(inputData);
-    clearForm();
+    dispatch(handleFormSubmit(inputData))
+    // console.log(inputData);
+ 
+    //   if (isStarBtnClicked) {
+    //     await updateDoc(doc(FIRESTORE, "AllMails", starredMails), {
+    //         ...inputData,
+    //     }).then(() => {
+    //         alert("Updated");
+    //         clearForm();
+    //         setIsUpdating(false);
+    //     }).catch(err => {
+    //         console.log(err);
+    //     })
 
-    if (inputData.sectionName === "primary") {
-      await addDoc(collection(FIRESTORE, "PrimaryMail"), {
-        ...inputData,
-      })
-        .then(() => {
-          alert("Submitted");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      console.log("primary");
-    } else if (inputData.sectionName === "promotions") {
-      await addDoc(collection(FIRESTORE, "PromotionsMail"), {
-        ...inputData,
-      })
-        .then(() => {
-          alert("Submitted");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      console.log("promotions");
-    } else if (inputData.sectionName === "social") {
-      await addDoc(collection(FIRESTORE, "SocialMail"), {
-        ...inputData,
-      })
-        .then(() => {
-          alert("Submitted");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      console.log("social");
-    }
+    //     console.log('star btn is clicked')
+    //     console.log(`is starred state is ${isStarred}`)
+
+
+    // } else {
+    //   await addDoc(collection(FIRESTORE, "AllMails"), {
+    //     ...inputData,
+    //   })
+    //     .then(() => {
+    //       alert("Submitted");
+    //       clearForm();
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+  
+    //    console.log('star button is not clicked')
+    //    console.log(`is starred state is ${isStarred}`)
+    // }
+
+   
+    
   };
 
   return (
@@ -82,29 +96,31 @@ const Create = () => {
               name="sectionName"
               onChange={handleChange}
               value={section}
-              checked = {inputData.sectionName === section}
+      
             />
             {section}
           </Fragment>
         ))}
-        <br></br>
+       <br />
         <input
           type="text"
           placeholder="Enter subject"
           name="subject"
           onChange={handleChange}
-          value={inputData.subject}
+        
         />
-        <br></br>
-        <input
-          type="text"
-          placeholder="Enter body"
+        <br />
+       <label/>Enter mail body :
+        <textarea rows={5} cols={90}  
           name="body"
           onChange={handleChange}
-          value={inputData.body}
-        />
-        <br></br>
-        <button onClick={handleFormSubmit}>Submit</button>
+         
+         />
+         <input type='email' placeholder="sender"  name="senderEmailAddress"  onChange={handleChange}/>
+         <br/>
+         <input type='email' placeholder="receiver" name="receiverEmailAddress"  onChange={handleChange}/>
+        <br />
+        <button onClick={handleSubmitBtn}>Submit</button>
       </form>
     </>
   );
