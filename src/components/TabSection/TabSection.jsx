@@ -1,21 +1,15 @@
-import React, { Fragment, useEffect, useState } from 'react';
+// import React, { Fragment, useEffect, useState } from 'react';
 import './TabSectionStyle.css';
-import { getMailFromServer } from '../../redux/gmailSlice';
+// import { getMailFromServer } from '../../redux/gmailSlice';
 import MailComponent from '../MailComponent/MailComponent';
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 
+// eslint-disable-next-line react/prop-types
 const TabSection = ({ filterType }) => {
 
-    const dispatch = useDispatch() ;
-    useEffect(() => {
-      dispatch(getMailFromServer(filterType))
-    }, []);
-
-
-    const receivedMail = useSelector((state) => state.gmail.receivedMail);
     return (
         <>
-            <MailComponent receivedMailData = {receivedMail}/>
+            <MailComponent filterType={filterType} />
         </>
     );
 };

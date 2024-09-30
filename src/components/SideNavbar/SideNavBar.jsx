@@ -21,7 +21,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import TabsComponent from '../TabsComponent/TabsComponent';
 import logo from '../../images/logo.png';
 import './SideNavBar.css'
-import { Routes, useNavigate ,Route} from 'react-router-dom';
+import { Routes, useNavigate, Route } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Create from '../../pages/Create/Create'
 import Gmail from '../../pages/Gmail/Gmail'
@@ -32,13 +32,15 @@ import { Drafts } from '@mui/icons-material';
 
 const drawerWidth = 240;
 const pages = [
-    {pathName : 'Gmail',
-     routeLink : '/'
-    } ,
+  {
+    pathName: 'Gmail',
+    routeLink: '/'
+  },
 
-    {pathName : 'Create',
-        routeLink : '/create'
-       }
+  {
+    pathName: 'Create',
+    routeLink: '/create'
+  }
 
 
 ];
@@ -128,7 +130,7 @@ export default function SideNavbar() {
   const navigate = useNavigate()
 
   const handleRoute = (path) => {
-      navigate(path)
+    navigate(path)
   }
 
   const handleDrawerOpen = () => {
@@ -140,7 +142,7 @@ export default function SideNavbar() {
   };
 
   return (
-    <Box sx={{ display: 'flex'}} >
+    <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <AppBar position="fixed" open={open} className='header'>
         <Toolbar>
@@ -152,38 +154,38 @@ export default function SideNavbar() {
             sx={[
               {
                 marginRight: 5,
-                color:'rgb(82,82,82)' 
+                color: 'rgb(82,82,82)'
               },
               open && { display: 'none' },
             ]}
           >
             <MenuIcon />
           </IconButton>
-          
-          <Box  nowrap="true" component="div" sx = {{display:'flex' }}>
-            <img src={logo} width={"40px"} className='logo-icon'/>
-          
-          <Box
+
+          <Box nowrap="true" component="div" sx={{ display: 'flex' }}>
+            <img src={logo} width={"40px"} className='logo-icon' />
+
+            <Box
               id="menu-appbar"
-              sx={{ display: 'flex'  ,  color:"rgb(82,82,82) " }}
+              sx={{ display: 'flex', color: "rgb(82,82,82) " }}
             >
-              {pages.map((page) => (     
-                   <Button
-                   component="a"
-                   href="#app-bar-with-responsive-menu"
-                   nowrap = 'true'
-                   sx={{
-                     mr: 2,
-                     fontWeight: 500,
-                     color:"rgb(82,82,82) " ,
-                     textDecoration: 'none',
-                     fontSize:"20px"
-                   }}
-                   key={page.pathName}
-                   onClick={() => {handleRoute(page.routeLink)}}
-                 >
-                 {page.pathName}
-                 </Button>
+              {pages.map((page) => (
+                <Button
+                  component="a"
+                  href="#app-bar-with-responsive-menu"
+                  nowrap='true'
+                  sx={{
+                    mr: 2,
+                    fontWeight: 500,
+                    color: "rgb(82,82,82) ",
+                    textDecoration: 'none',
+                    fontSize: "20px"
+                  }}
+                  key={page.pathName}
+                  onClick={() => { handleRoute(page.routeLink) }}
+                >
+                  {page.pathName}
+                </Button>
               ))}
             </Box>
           </Box>
@@ -208,12 +210,13 @@ export default function SideNavbar() {
                   },
                   open
                     ? {
-                        justifyContent: 'initial',
-                      }
+                      justifyContent: 'initial',
+                    }
                     : {
-                        justifyContent: 'center',
-                      },
+                      justifyContent: 'center',
+                    },
                 ]}
+                onClick={() => handleRoute(text.toLowerCase())}
               >
                 <ListItemIcon
                   sx={[
@@ -223,11 +226,11 @@ export default function SideNavbar() {
                     },
                     open
                       ? {
-                          mr: 3,
-                        }
+                        mr: 3,
+                      }
                       : {
-                          mr: 'auto',
-                        },
+                        mr: 'auto',
+                      },
                   ]}
                 >
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -237,14 +240,12 @@ export default function SideNavbar() {
                   sx={[
                     open
                       ? {
-                          opacity: 1,
-                        }
+                        opacity: 1,
+                      }
                       : {
-                          opacity: 0,
-                        },
+                        opacity: 0,
+                      },
                   ]}
-
-                  onClick={() => handleRoute(text.toLowerCase())}
                 />
               </ListItemButton>
             </ListItem>
@@ -262,11 +263,11 @@ export default function SideNavbar() {
                   },
                   open
                     ? {
-                        justifyContent: 'initial',
-                      }
+                      justifyContent: 'initial',
+                    }
                     : {
-                        justifyContent: 'center',
-                      },
+                      justifyContent: 'center',
+                    },
                 ]}
               >
                 <ListItemIcon
@@ -277,11 +278,11 @@ export default function SideNavbar() {
                     },
                     open
                       ? {
-                          mr: 3,
-                        }
+                        mr: 3,
+                      }
                       : {
-                          mr: 'auto',
-                        },
+                        mr: 'auto',
+                      },
                   ]}
                 >
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -291,11 +292,11 @@ export default function SideNavbar() {
                   sx={[
                     open
                       ? {
-                          opacity: 1,
-                        }
+                        opacity: 1,
+                      }
                       : {
-                          opacity: 0,
-                        },
+                        opacity: 0,
+                      },
                   ]}
                 />
               </ListItemButton>
@@ -304,17 +305,17 @@ export default function SideNavbar() {
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <DrawerHeader />
-      
-      <Routes>
-      <Route path='/' element={<Gmail />} />
-      <Route path='/create' element={<Create />} />
-      <Route path='/inbox' element={<InboxPage />} />
-      <Route path='/starred' element={<Starred />} />
-      <Route path='/send email' element={<SendEmail />} />
-      <Route path='/drafts' element={<Drafts />} />
-      </Routes>
-        
+        <DrawerHeader />
+
+        <Routes>
+          <Route path='/' element={<Gmail />} />
+          <Route path='/create' element={<Create />} />
+          <Route path='/inbox' element={<InboxPage />} />
+          <Route path='/starred' element={<Starred />} />
+          <Route path='/send email' element={<SendEmail />} />
+          <Route path='/drafts' element={<Drafts />} />
+        </Routes>
+
       </Box>
     </Box>
   );
