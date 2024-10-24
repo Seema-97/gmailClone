@@ -1,12 +1,8 @@
-
+/* Appbar code */
 .header{
-   background-color: rgb(243, 250, 255) !important ;
+   background-color: #f6f8fc !important ;
    box-shadow: none !important;
-}
-
-.drawer , .side-nav-list{
-    background-color: rgb(243, 250, 255) !important ;
-}
+} 
 
 .logo-icon{
     width:35px;
@@ -14,4 +10,31 @@
     object-fit: contain;
     margin-right:18px;
     margin-top:6px;
+}
+
+/* Drawer */
+.MuiDrawer-paper{
+    border:none !important;
+    background-color: #f6f8fc !important ;
+   padding-inline: 10px !important;
+}
+
+.compose-button{
+    background-color: #c2e7ff !important;
+    border-radius: 20px !important;
+    color:black !important ;
+    height:60px !important;
+}
+
+.list-item-icon{
+    font-size: 21px !important;
+}
+
+/* main section code */
+.main-section-140{
+    margin-left: -140px !important ;
+}
+
+.main-section-0{
+    margin-left: 0 !important ;
 }

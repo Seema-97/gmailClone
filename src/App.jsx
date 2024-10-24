@@ -1,8 +1,6 @@
 
 
-import './App.css'
 import SideNavbar from './components/sideNavbar/SideNavBar'
-
 
 
 
@@ -12,7 +10,6 @@ function App() {
     <>
   
       <SideNavbar />
-  
     </>
   )
 }

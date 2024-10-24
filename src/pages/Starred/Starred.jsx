@@ -5,8 +5,10 @@ import React, { Fragment, useEffect } from 'react'
 import { Box, IconButton, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
-import { getStarredMailFromServer } from '../../redux/gmailSlice';
+import { getStarredMailFromServer, updateStarMail } from '../../redux/gmailSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useMyContext } from '../../context/context';
 
 
 const Starred = () => {
@@ -21,17 +23,33 @@ console.log(starredMail)
     console.log('hii')
   }, []); 
 
+  const toggleStar = (mail) => {
+      const newIsStarred = !mail.info.isStarred;
+      dispatch(updateStarMail({ mail, newIsStarred }));
+      dispatch(getStarredMailFromServer())
+  }
+
+  const navigate = useNavigate()
+
+  const myContextUse = useMyContext()
+  const{setMailContent , setMailViewOpen} = myContextUse
+  const openMailView = (mail) => {
+      console.log(mail)
+      navigate('/mail view')
+      setMailViewOpen(true)
+      setMailContent(mail)
+  }
+  
 
   return (
-
 
     <>
     {starredMail?.map(mail => (
       <Fragment key={mail.id}>
-  <Box className='mailTitleBox'>
+  <Box className='mailTitleBox' onClick={()=> {openMailView(mail)}}>
       <IconButton
           className='star-btn'
-          onClick = {() => {removeStarredMail(mail.id)}}
+          onClick = {() => {toggleStar(mail)}}
       >
             <StarIcon className='star-icon-filled' />
       </IconButton>

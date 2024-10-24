@@ -9,36 +9,10 @@ const sectionName = ["primary", "promotion", "social"];
 
   
 const Create = () => {
-  // const isStarred = useSelector(state => state.gmail.isStarred);
-  // const isStarBtnClicked = useSelector(state => state.gmail.isStarBtnClicked
-  // ) 
-  // const starredMails = useSelector(state => state.gmail.starredMails)
-  // console.log('starred mail ' + starredMails)
 
-  // console.log('star btn is clicked')
-  // console.log(`is starred state is ${isStarred}`)
 
   const dispatch = useDispatch()
   const inputData = useSelector(state => state.gmail.inputData)
-
-  // const [inputData, setInputData] = useState({
-  //   sectionName: "",
-  //   subject: "",
-  //   body: "",
-  //   senderEmailAddress:"",
-  //   receiverEmailAddress: "",
-  //   isStarred: isStarred
-  // });
-
-  // const clearForm = () => {
-  //   setInputData({
-  //     sectionName: "",
-  //     subject: "",
-  //     body: "",
-  //     senderEmailAddress:"",
-  //     receiverEmailAddress: ""
-  //   });
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,42 +21,7 @@ const Create = () => {
 
   const handleSubmitBtn = async (e) => {
     e.preventDefault();
-    dispatch(handleFormSubmit(inputData))
-    // console.log(inputData);
- 
-    //   if (isStarBtnClicked) {
-    //     await updateDoc(doc(FIRESTORE, "AllMails", starredMails), {
-    //         ...inputData,
-    //     }).then(() => {
-    //         alert("Updated");
-    //         clearForm();
-    //         setIsUpdating(false);
-    //     }).catch(err => {
-    //         console.log(err);
-    //     })
-
-    //     console.log('star btn is clicked')
-    //     console.log(`is starred state is ${isStarred}`)
-
-
-    // } else {
-    //   await addDoc(collection(FIRESTORE, "AllMails"), {
-    //     ...inputData,
-    //   })
-    //     .then(() => {
-    //       alert("Submitted");
-    //       clearForm();
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-  
-    //    console.log('star button is not clicked')
-    //    console.log(`is starred state is ${isStarred}`)
-    // }
-
-   
-    
+    dispatch(handleFormSubmit(inputData))   
   };
 
   return (

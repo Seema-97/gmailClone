@@ -1,0 +1,26 @@
+
+.mail-content-box{
+    padding-inline: 15px;
+}
+
+
+.mail-id-info{
+    display:flex ;
+     gap:20px
+}
+
+.person-icon{
+    font-size:50px !important;
+    color:lightgray !important;
+}
+
+.mail-id{
+   font-size:15px ;
+    color:gray
+}
+
+.username{
+   font-weight:bold ;
+    font-size:20px; 
+    color:black
+}

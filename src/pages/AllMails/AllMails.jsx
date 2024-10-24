@@ -2,20 +2,35 @@
 import { Box, IconButton, Typography } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getMailFromServer, updateStarMail } from '../../redux/gmailSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { collection, getDocs } from 'firebase/firestore';
+import { FIRESTORE } from '../../firebase.config';
 import { useNavigate } from 'react-router-dom';
 import { useMyContext } from '../../context/context';
 
 
-const MailComponent = ({ filterType }) => {
-    const receivedMailData = useSelector((state) => state.gmail.receivedMail);
-
-    const dispatch = useDispatch()
+const AllMail = ({ filterType }) => {
+   
+    const[receivedAllMails , setReceivedAllMails] = useState([])
+     
     useEffect(() => {
-        dispatch(getMailFromServer(filterType))
+      getAllMailsFromSever() 
     }, []);
+
+    const getAllMailsFromSever = async() =>{
+        const fetchedData = await getDocs(collection(FIRESTORE , 'AllMails'));
+        let temp = []
+        fetchedData.forEach(doc => {
+        const data ={
+             id : doc.id,
+             info : doc.data()
+         }
+         temp.push(data)
+        } 
+     )
+     setReceivedAllMails(temp)    
+    }
 
     const toggleStar = (mail) => {
         const newIsStarred = !mail.info.isStarred; // Calculate new state value
@@ -37,9 +52,9 @@ const MailComponent = ({ filterType }) => {
     return (
         <>
 
-            {receivedMailData?.map(mail => (
+            {receivedAllMails?.map(mail => (
                 <Fragment key={mail.id}>
-                    <Box className='mailTitleBox' onClick={()=> {openMailView(mail)}}>
+                    <Box className='mailTitleBox' onClick={() => {openMailView(mail)}}>
                         <IconButton
                             className='star-btn'
                             onClick={() => toggleStar(mail)}
@@ -57,4 +72,4 @@ const MailComponent = ({ filterType }) => {
     )
 }
 
-export default MailComponent
+export default AllMail
