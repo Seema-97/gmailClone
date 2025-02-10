@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import "./ModalComponent.css"
-import { handleIsStarred } from '../../redux/gmailSlice';
+// import { handleIsStarred } from '../../redux/gmailSlice';
 import { addDoc, collection } from 'firebase/firestore';
 import { FIRESTORE } from '../../firebase.config';
 
