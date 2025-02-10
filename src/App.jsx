@@ -1,14 +1,13 @@
 
 
-import SideNavbar from './components/sideNavbar/SideNavBar'
+import SideNavbar from './components/SideNavbar/SideNavBar'
 
 
 
 function App() {
   
   return (
-    <>
-  
+    <> 
       <SideNavbar />
     </>
   )
